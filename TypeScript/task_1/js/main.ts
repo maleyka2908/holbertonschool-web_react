@@ -19,23 +19,29 @@ export const printTeacher: printTeacherFunction = (firstName: string, lastName: 
   return `${firstName.charAt(0)}. ${lastName}`;
 };
 
-const teacher3: Teacher = {
-  firstName: 'John',
-  fullTimeEmployee: false,
-  lastName: 'Doe',
-  location: 'London',
-  contract: false,
-};
+export interface StudentClassConstructor {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
 
-console.log(teacher3);
+export interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
 
-const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
-};
+export class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
 
-console.log(director1);
-console.log(printTeacher("John", "Doe"));
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return 'Currently working';
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
